@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class ResetPopup : MonoBehaviour
 {
-    GameObject[] resetObjects;
+    public GameObject[] resetObjects;
     public static int numberOfLevels;
 
     private void Start()
     {
-        resetObjects = GameObject.FindGameObjectsWithTag("Reset");
+        //resetObjects = GameObject.FindGameObjectsWithTag("Reset");
         hideWindow();
         numberOfLevels = 6;
     }
@@ -17,9 +17,11 @@ public class ResetPopup : MonoBehaviour
     // Make the contents of the window.
     public void showWindow()
     {
+        print("Show");
         foreach (GameObject obj in resetObjects)
         {
             obj.SetActive(true);
+            print("Show");
         }
     }
 

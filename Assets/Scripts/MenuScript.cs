@@ -9,6 +9,7 @@ public class MenuScript : MonoBehaviour {
     bool[] locks;
     Transform destination;
     bool moving;
+    public bool reverseInputs;
 
 	// Use this for initialization
 	void Start () {
@@ -21,16 +22,31 @@ public class MenuScript : MonoBehaviour {
         {
             levelScore[i] = PlayerPrefs.GetInt("Score " + i);
         }
+        reverseInputs = false;
 	}
 
     // Update is called once per frame
     void Update() {
-		if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && level > 1)
+        if (reverseInputs)
         {
-            level -= 1;
-        } else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow)) && levelScore[level] > 0)
+            if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && level > 1)
+            {
+                level -= 1;
+            }
+            else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && levelScore[level] > 0)
+            {
+                level += 1;
+            }
+        } else
         {
-            level += 1;
+            if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && level > 1)
+            {
+                level -= 1;
+            }
+            else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow)) && levelScore[level] > 0)
+            {
+                level += 1;
+            }
         }
         //Determines position
         if (!moving)
